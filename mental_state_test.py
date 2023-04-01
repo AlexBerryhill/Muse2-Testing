@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Exercise 2: A basic Brain-Computer Interface
+A basic Brain-Computer Interface
 =============================================
 
 Description:
-In this second exercise, we will learn how to use an automatic algorithm to
+We will how to use an automatic algorithm to
 recognize somebody's mental states from their EEG. We will use a classifier,
 i.e., an algorithm that, provided some data, learns to recognize patterns,
 and can then classify similar unseen information.
@@ -21,7 +21,7 @@ import auxiliary_tools as BCIw  # Our own functions for the workshop
 
 if __name__ == "__main__":
 
-        """ Open Serial port to Arduino """
+        # """ Open Serial port to Arduino """
         arduino = serial.Serial(port = 'COM4', timeout=0)
         time.sleep(2)  
 
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         buffer_length = 15
 
         # Length of the epochs used to compute the FFT (in seconds)
-        epoch_length = 1
+        epoch_length = 2
 
         # Amount of overlap between two consecutive epochs (in seconds)
         overlap_length = 0.8
@@ -103,18 +103,18 @@ if __name__ == "__main__":
         eeg_data1, timestamps1 = inlet.pull_chunk(
                 timeout=training_length+1, max_samples=fs * training_length)
         eeg_data1 = np.array(eeg_data1)[:, index_channel]
-        print(1)
+        
         # Divide data into epochs
         eeg_epochs0 = BCIw.epoch(eeg_data0, epoch_length * fs,
                                 overlap_length * fs)
         eeg_epochs1 = BCIw.epoch(eeg_data1, epoch_length * fs,
                                 overlap_length * fs)
-        print(2)
+        
         """ 4. COMPUTE FEATURES AND TRAIN CLASSIFIER """
-        print(3)
+        
         feat_matrix0 = BCIw.compute_feature_matrix(eeg_epochs0, fs)
         feat_matrix1 = BCIw.compute_feature_matrix(eeg_epochs1, fs)
-        print(4)
+        
         [classifier, mu_ft, std_ft, score] = BCIw.train_classifier(
                 feat_matrix0, feat_matrix1, 'SVM')
 

@@ -192,6 +192,8 @@ def train_classifier(feature_matrix_0, feature_matrix_1, algorithm='SVM'):
     # Create vector Y (class labels)
     class0 = np.zeros((feature_matrix_0.shape[0], 1))
     class1 = np.ones((feature_matrix_1.shape[0], 1))
+    class0=np.nan_to_num(class0)
+    class1=np.nan_to_num(class1)
 
     # Concatenate feature matrices and their respective labels
     y = np.concatenate((class0, class1), axis=0)
@@ -210,7 +212,7 @@ def train_classifier(feature_matrix_0, feature_matrix_1, algorithm='SVM'):
     score = clf.score(X, y.ravel())
 
     # Visualize decision boundary
-#    plot_classifier_training(clf, X, y, features_to_plot=[0, 1])
+    # plot_classifier_training(clf, X, y, features_to_plot=[0, 1])
 
     return clf, mu_ft, std_ft, score
 
